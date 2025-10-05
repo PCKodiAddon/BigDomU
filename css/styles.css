@@ -1,0 +1,153 @@
+/* 
+  BigDomU Website Styles
+  - Mobile-first, Bootstrap-friendly overrides
+  - Colors reflect app accents and gradients
+  - Accessible, performant, and tasteful animations
+*/
+
+:root {
+  /* App-inspired colors from Android drawables */
+  --bg-1: #121622;         /* matches bg_main_gradient startColor */
+  --bg-2: #0A0E12;         /* matches bg_main_gradient endColor */
+  --accent-blue: #2196F3;  /* blue accent glow */
+  --accent-purple: #7B1FA2;/* purple accent (Halloween gradient) */
+  --accent-orange: #FF9800;/* orange accent (Halloween gradient) */
+  --accent-slate: #455A64; /* slate from overlay/street view button */
+  --text-muted: #9AA4AD;
+
+  /* Component colors */
+  --pill-bg: rgba(30,30,30,0.85);
+  --card-border: rgba(255,255,255,0.15);
+}
+
+/* Base */
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Roboto", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height: 1.6;
+  background-color: var(--bg-1);
+  color: #fff;
+}
+
+/* Background gradient with accent glows similar to app */
+.bg-app {
+  min-height: 100vh;
+  background-image:
+    radial-gradient(48rem 48rem at 10% 0%, rgba(33,150,243,0.25), rgba(33,150,243,0) 60%),
+    radial-gradient(60rem 60rem at 95% 100%, rgba(123,31,162,0.25), rgba(123,31,162,0) 60%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  background-attachment: fixed;
+}
+
+/* Translucent surfaces */
+.bg-translucent {
+  background-color: rgba(13,13,13,0.65);
+  backdrop-filter: saturate(120%) blur(8px);
+}
+
+/* Spacing utilities */
+.py-6 { padding-top: 4rem; padding-bottom: 4rem; }
+
+/* Typography */
+.brand-text { font-weight: 700; letter-spacing: 0.4px; }
+.lead { color: var(--text-muted); }
+
+/* Buttons: align with accents */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--accent-purple);
+  --bs-btn-border-color: var(--accent-purple);
+  --bs-btn-hover-bg: #6a1797;
+  --bs-btn-hover-border-color: #6a1797;
+  --bs-btn-focus-shadow-rgb: 123,31,162;
+}
+.btn-outline-light {
+  --bs-btn-color: #fff;
+  --bs-btn-border-color: var(--accent-orange);
+  --bs-btn-hover-bg: var(--accent-orange);
+  --bs-btn-hover-border-color: var(--accent-orange);
+}
+
+/* Hero */
+.hero-section {
+  text-align: center;
+  position: relative;
+}
+.gradient-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(36rem 36rem at 0% 0%, rgba(255,152,0,0.20), rgba(255,152,0,0) 55%),
+    radial-gradient(28rem 28rem at 100% 100%, rgba(187,134,252,0.20), rgba(187,134,252,0) 55%);
+}
+
+/* Feature cards */
+.feature-card {
+  background-color: var(--pill-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+}
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.25rem;
+}
+.bg-orange { background-color: var(--accent-orange); }
+.bg-blue   { background-color: var(--accent-blue); }
+.bg-purple { background-color: var(--accent-purple); }
+.bg-slate  { background-color: var(--accent-slate); }
+
+/* Gallery */
+.placeholder-tile {
+  /* Placeholder visuals for XML references */
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border: 1px dashed rgba(255,255,255,0.2);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+}
+.gallery-item img {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.gallery-item:focus img,
+.gallery-item:hover img {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+.gallery-item { outline: none; }
+
+/* Footer */
+.footer { color: #fff; }
+.footer .text-muted { color: var(--text-muted) !important; }
+
+/* Reveal animations (respect reduced motion) */
+.reveal { opacity: 0; transform: translateY(16px); }
+.reveal.animate-in { opacity: 1; transform: translateY(0); transition: opacity 500ms ease, transform 500ms ease; }
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10000;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
