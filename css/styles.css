@@ -47,6 +47,13 @@ body {
 
 /* Spacing utilities */
 .py-6 { padding-top: 4rem; padding-bottom: 4rem; }
+.pt-6 { padding-top: 5rem; }
+
+/* Privacy page: force all text to white */
+.policy,
+.policy * {
+  color: #fff !important;
+}
 
 /* Typography */
 .brand-text { font-weight: 700; letter-spacing: 0.4px; }
